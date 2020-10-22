@@ -3,61 +3,61 @@ package com.step.maths;
 import java.util.Arrays;
 
 public class Matrix{
-  private int rows;
-  private int columns;
+  private int rowsCount;
+  private int columnsCount;
   private int[][] arr;
 
-  public Matrix(int[][] arr, int rows, int columns){
-    this.rows = rows;
-    this.columns = columns;
-    this.arr = new int[rows][columns];
-    for(int i = 0; i < rows; i++){
-      this.arr[i] = Arrays.copyOf(arr[i], columns);
+  public Matrix(int[][] arr, int rowsCount, int columnsCount){
+    this.rowsCount = rowsCount;
+    this.columnsCount = columnsCount;
+    this.arr = new int[rowsCount][columnsCount];
+    for(int rowsNo = 0; rowsNo < rowsCount; rowsNo++){
+      this.arr[rowsNo] = Arrays.copyOf(arr[rowsNo], columnsCount);
     }
   }
 
   public Matrix add(Matrix matrix){
-    int[][] result = new int[this.rows][this.columns];
-    for(int row = 0; row <this.rows; row++){
-      for(int col = 0; col <this.columns; col++){
-        result[row][col] = this.arr[row][col] + matrix.arr[row][col];
+    int[][] result = new int[this.rowsCount][this.columnsCount];
+    for(int rowsNo = 0; rowsNo <this.rowsCount; rowsNo++){
+      for(int colNo = 0; colNo <this.columnsCount; colNo++){
+        result[rowsNo][colNo] = this.arr[rowsNo][colNo] + matrix.arr[rowsNo][colNo];
       }
     }
-    return new Matrix(result, this.rows, this.columns);
+    return new Matrix(result, this.rowsCount, this.columnsCount);
   }
 
   public Matrix subtract(Matrix matrix) {
-    int[][] result = new int[this.rows][this.columns];
-    for(int row = 0; row <this.rows; row++){
-      for(int col = 0; col <this.columns; col++){
-        result[row][col] = this.arr[row][col] - matrix.arr[row][col];
+    int[][] result = new int[this.rowsCount][this.columnsCount];
+    for(int rowNo = 0; rowNo <this.rowsCount; rowNo++){
+      for(int colNo = 0; colNo <this.columnsCount; colNo++){
+        result[rowNo][colNo] = this.arr[rowNo][colNo] - matrix.arr[rowNo][colNo];
       }
     }
-    return new Matrix(result, this.rows, this.columns);
+    return new Matrix(result, this.rowsCount, this.columnsCount);
   }
 
   public Matrix multiply(Matrix matrix){
-    int[][] result = new int[this.rows][matrix.columns];
-    for(int i = 0; i <this.rows; i++){
-      for(int j = 0; j <this.columns; j++){
-        result[i][j] = 0;
-        for(int k = 0; k <this.columns; k++){
-          result[i][j] += this.arr[i][k] * matrix.arr[k][j];
+    int[][] result = new int[this.rowsCount][matrix.columnsCount];
+    for(int rowNo = 0; rowNo <this.rowsCount; rowNo++){
+      for(int columnNo = 0; columnNo  <this.columnsCount; columnNo ++){
+        result[rowNo][columnNo] = 0;
+        for(int index = 0; index <this.columnsCount; index++){
+          result[rowNo][columnNo] += this.arr[rowNo][index] * matrix.arr[index][columnNo];
         }
       }
     }
-    return new Matrix(result, this.rows, matrix.columns);
+    return new Matrix(result, this.rowsCount, matrix.columnsCount);
   }
 
   private static int[][] createSubMatrix(int[][] matrix, int matrixColumn) {
     int length = matrix.length;
     int[][] subMatrix = new int[length - 1][length - 1];
-    for (int row = 1; row < length; row++) {
-      for (int column = 0; column < length; column++) {
-        int subColumn = column > matrixColumn ? column - 1 : column;
-        int subRow = row - 1;
-        if (column != matrixColumn) {
-          subMatrix[subRow][subColumn] = matrix[row][column];
+    for (int rowNo = 1; rowNo < length; rowNo++) {
+      for (int columnNo = 0; columnNo < length; columnNo++) {
+        int subColumn = columnNo > matrixColumn ? columnNo - 1 : columnNo;
+        int subRow = rowNo - 1;
+        if (columnNo != matrixColumn) {
+          subMatrix[subRow][subColumn] = matrix[rowNo][columnNo];
         }
       }
     }
@@ -74,11 +74,11 @@ public class Matrix{
     }
 
     int determinant = 0;
-    for (int matrixColumn = 0; matrixColumn < matrix.length; matrixColumn++) {
-      int[][] subMatrix = createSubMatrix(matrix, matrixColumn);
+    for (int columnNo = 0; columnNo < matrix.length; columnNo++) {
+      int[][] subMatrix = createSubMatrix(matrix, columnNo);
       determinant +=
-        Math.pow (-1, matrixColumn) *
-        matrix[0][matrixColumn] *
+        Math.pow (-1, columnNo) *
+        matrix[0][columnNo] *
         findDeterminant(subMatrix);
     }
     return (determinant);

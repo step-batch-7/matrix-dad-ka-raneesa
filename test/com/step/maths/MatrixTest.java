@@ -23,8 +23,8 @@ public class MatrixTest{
   @Test
   public void shouldGiveTrueForSameMatrices(){
     int[][] data1 = {{1,2}, {4,5}};
-    Matrix matrix1 = new Matrix(data1, 2, 2);
     int[][] data2 = {{1,2}, {4,5}};
+    Matrix matrix1 = new Matrix(data1, 2, 2);
     Matrix matrix2 = new Matrix(data2, 2, 2);
     assertTrue(matrix1.equals(matrix2));
   }
@@ -32,8 +32,8 @@ public class MatrixTest{
   @Test
   public void shouldGiveFalseForDifferentMatrices(){
     int[][] data1 = {{1,2}, {4,5}};
-    Matrix matrix1 = new Matrix(data1, 2, 2);
     int[][] data2 = {{1,2}};
+    Matrix matrix1 = new Matrix(data1, 2, 2);
     Matrix matrix2 = new Matrix(data2, 1, 2);
     assertFalse(matrix1.equals(matrix2));
   }
@@ -48,10 +48,10 @@ public class MatrixTest{
   @Test
   public void shouldAddEqualRowAndColumnLengthOfMatrices(){
     int[][] arr1 = {{1,2,3},{2,3,4},{3,4,5}};
-    Matrix matrix1 = new Matrix(arr1, 3, 3);
     int[][] arr2 ={{1,3,4},{1,5,4},{2,4,3}};
-    Matrix matrix2 = new Matrix(arr2, 3, 3);
     int[][] data = {{2,5,7},{3,8,8},{5,8,8}};
+    Matrix matrix1 = new Matrix(arr1, 3, 3);
+    Matrix matrix2 = new Matrix(arr2, 3, 3);
     Matrix expected = new Matrix(data,3, 3);
     assertEquals(matrix1.add(matrix2), expected);
   }
@@ -59,10 +59,10 @@ public class MatrixTest{
   @Test
   public void shouldSutractEqualRowAndColumnLengthOfMatrices(){
     int[][] arr1 = {{1,2,3},{2,3,4},{3,4,5}};
-    Matrix matrix1 = new Matrix(arr1, 3, 3);
     int[][] arr2 ={{1,3,4},{1,5,4},{2,4,3}};
-    Matrix matrix2 = new Matrix(arr2, 3, 3);
     int[][] data = {{0,-1,-1},{1,-2,0},{1,0,2}};
+    Matrix matrix1 = new Matrix(arr1, 3, 3);
+    Matrix matrix2 = new Matrix(arr2, 3, 3);
     Matrix expected = new Matrix(data,3, 3);
     assertEquals(matrix1.subtract(matrix2), expected);
   }
@@ -70,10 +70,10 @@ public class MatrixTest{
   @Test
   public void shouldMultiplyEqualRowAndColumnLengthOfMatrices(){
     int[][] arr1 = {{1,2,3},{2,3,4},{3,4,5}};
-    Matrix matrix1 = new Matrix(arr1, 3, 3);
     int[][] arr2 ={{1,3,4},{1,5,4},{2,4,3}};
-    Matrix matrix2 = new Matrix(arr2, 3, 3);
     int[][] data = {{9,25,21},{13,37,32},{17,49,43}};
+    Matrix matrix1 = new Matrix(arr1, 3, 3);
+    Matrix matrix2 = new Matrix(arr2, 3, 3);
     Matrix expected = new Matrix(data,3, 3);
     assertEquals(matrix1.multiply(matrix2), expected);
   }
