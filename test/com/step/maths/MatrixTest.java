@@ -45,4 +45,15 @@ public class MatrixTest{
     assertFalse(matrix.equals(new Object()));
   }
 
+  @Test
+  public void shouldAddEqualRowAndColumnLengthOfMatrices(){
+    int[][] arr1 = {{1,2,3},{2,3,4},{3,4,5}};
+    Matrix matrix1 = new Matrix(arr1, 3, 3);
+    int[][] arr2 ={{1,3,4},{1,5,4},{2,4,3}};
+    Matrix matrix2 = new Matrix(arr2, 3, 3);
+    int[][] data = {{2,5,7},{3,8,8},{5,8,8}};
+    Matrix expected = new Matrix(data,3, 3);
+    assertEquals(matrix1.add(matrix2), expected);
+  }
+
 }
