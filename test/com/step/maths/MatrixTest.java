@@ -56,4 +56,14 @@ public class MatrixTest{
     assertEquals(matrix1.add(matrix2), expected);
   }
 
+  @Test
+  public void shouldSutractEqualRowAndColumnLengthOfMatrices(){
+    int[][] arr1 = {{1,2,3},{2,3,4},{3,4,5}};
+    Matrix matrix1 = new Matrix(arr1, 3, 3);
+    int[][] arr2 ={{1,3,4},{1,5,4},{2,4,3}};
+    Matrix matrix2 = new Matrix(arr2, 3, 3);
+    int[][] data = {{0,-1,-1},{1,-2,0},{1,0,2}};
+    Matrix expected = new Matrix(data,3, 3);
+    assertEquals(matrix1.subtract(matrix2), expected);
+  }
 }
