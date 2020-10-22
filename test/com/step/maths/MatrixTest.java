@@ -77,4 +77,25 @@ public class MatrixTest{
     Matrix expected = new Matrix(data,3, 3);
     assertEquals(matrix1.multiply(matrix2), expected);
   }
+
+  @Test
+  public void shouldGiveDetOfMatrixOfRowAndColumnOfLengthOne(){
+    int[][] arr = {{2}};
+    Matrix matrix = new Matrix(arr, 1, 1);
+    assertEquals(matrix.determinant(), 2);
+  }
+
+  @Test
+  public void shouldGiveDetOfMatrixOfRowAndColumnOfLengthTwo(){
+    int[][] arr = {{8,2},{5,3}};
+    Matrix matrix = new Matrix(arr, 2, 2);
+    assertEquals(matrix.determinant(), 14);
+  }
+
+  @Test
+  public void shouldGiveDetOfMatrixOfRowAndColumnOfLengthMoreThanTwo(){
+    int[][] arr = {{2,4,7},{5,2,3},{2,4,6}};
+    Matrix matrix = new Matrix(arr, 3, 3);
+    assertEquals(matrix.determinant(), 16);
+  }
 }
