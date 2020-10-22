@@ -1,8 +1,7 @@
 package com.step.maths;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,24 +24,24 @@ public class MatrixTest{
 
   @Test
   public void shouldGiveTrueForMatricesOfSameReference(){
-    assertTrue(this.matrix1.equals(this.matrix1));
+    assertEquals(this.matrix1,this.matrix1);
   }
 
   @Test
   public void shouldGiveTrueForSameMatrices(){
     int[][] data = {{1,2,3},{2,3,4},{3,4,5}};
     Matrix expected = new Matrix(data, 3, 3);
-    assertTrue(this.matrix1.equals(expected));
+    assertEquals(this.matrix1,expected);
   }
 
   @Test
   public void shouldGiveFalseForDifferentMatrices(){
-    assertFalse(this.matrix1.equals(this.matrix2));
+    assertNotEquals(this.matrix1,this.matrix2);
   }
 
   @Test
   public void shouldGiveFalseForDifferenceInstanceObjects(){
-    assertFalse(this.matrix1.equals(new Object()));
+    assertNotEquals(this.matrix1,new Object());
   }
 
   @Test
