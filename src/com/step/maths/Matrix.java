@@ -49,43 +49,32 @@ public class Matrix{
     return new Matrix(result, this.rowsCount, matrix.columnsCount);
   }
 
-  private static int[][] createSubMatrix(int[][] matrix, int matrixColumn) {
-    int length = matrix.length;
-    int[][] subMatrix = new int[length - 1][length - 1];
-    for (int rowNo = 1; rowNo < length; rowNo++) {
-      for (int columnNo = 0; columnNo < length; columnNo++) {
-        int subColumn = columnNo > matrixColumn ? columnNo - 1 : columnNo;
+  private Matrix createSubMatrix(int index){
+    int[][] subMatrix = new int[this.rowsCount - 1][this.columnsCount -1];
+    for(int rowNo = 1; rowNo < this.rowsCount; rowNo++){
+      for(int columnNo = 0; columnNo < this.columnsCount; columnNo++){
+        int subColumn = columnNo > index? columnNo - 1 : columnNo;
         int subRow = rowNo - 1;
-        if (columnNo != matrixColumn) {
-          subMatrix[subRow][subColumn] = matrix[rowNo][columnNo];
+        if (columnNo != index) {
+          subMatrix[subRow][subColumn] = this.arr[rowNo][columnNo];
         }
       }
     }
-    return subMatrix;
-  }
-
-  public static int findDeterminant(int[][] matrix) {
-    if(matrix.length == 1){
-      return matrix[0][0];
-    } 
-
-    if (matrix.length == 2) {
-      return ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
-    }
-
-    int determinant = 0;
-    for (int columnNo = 0; columnNo < matrix.length; columnNo++) {
-      int[][] subMatrix = createSubMatrix(matrix, columnNo);
-      determinant +=
-        Math.pow (-1, columnNo) *
-        matrix[0][columnNo] *
-        findDeterminant(subMatrix);
-    }
-    return (determinant);
+    return new Matrix(subMatrix, this.rowsCount -1, this.columnsCount - 1);
   }
 
   public int determinant(){
-    return findDeterminant(this.arr);
+    if(this.rowsCount == 1) return this.arr[0][0];
+    if(this.rowsCount == 2) {
+      return ((this.arr[0][0] * this.arr[1][1]) - (this.arr[0][1] * this.arr[1][0]));
+    }
+
+    int det = 0;
+    for(int index = 0; index < this.columnsCount; index++){
+      Matrix subMatrix = createSubMatrix(index);
+      det += Math.pow(-1, index) * this.arr[0][index] * subMatrix.determinant(); 
+    }
+    return det;
   }
 
   @Override
