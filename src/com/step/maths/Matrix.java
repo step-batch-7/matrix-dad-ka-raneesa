@@ -1,5 +1,7 @@
 package com.step.maths;
 
+import java.util.Arrays;
+
 public class Matrix{
   private int rows;
   private int columns;
@@ -9,10 +11,8 @@ public class Matrix{
     this.rows = rows;
     this.columns = columns;
     this.arr = new int[rows][columns];
-    for(int row = 0; row < rows; row++){
-      for(int col = 0; col <columns; col++){
-        this.arr[row][col] = arr[row][col]; 
-      }
+    for(int i = 0; i < rows; i++){
+      this.arr[i] = Arrays.copyOf(arr[i], columns);
     }
   }
 
@@ -91,25 +91,9 @@ public class Matrix{
   @Override
   public String toString(){
     StringBuilder sb = new StringBuilder();
-    sb.append("Matrix\n");
-    for(int[] row: this.arr){
-      for(int num: row){
-        sb.append(num).append(" ");
-      }
-      sb.append("\n");
-    }
+    sb.append("Matrix ");
+    sb.append(Arrays.deepToString(this.arr));
     return sb.toString();
-  }
-
-  private boolean areDeepEqual(Matrix matrix){
-    for(int i = 0; i <this.rows; i++){
-      for(int j = 0; j <this.columns; j++){
-        if(this.arr[i][j] != matrix.arr[i][j]){
-          return false;
-        }
-      }
-    }
-    return true;
   }
 
   @Override
@@ -118,7 +102,6 @@ public class Matrix{
     if(!(other instanceof Matrix))
       return false;
     Matrix otherMatrix = (Matrix)other;
-    if(this.rows != otherMatrix.rows || this.columns != otherMatrix.columns) return false;
-    return areDeepEqual(otherMatrix);
+    return Arrays.deepEquals(this.arr, otherMatrix.arr);
   }
 }
